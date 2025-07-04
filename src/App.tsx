@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { Toaster } from '@/components/ui/toaster'
+import { AuthProvider } from '@/contexts/AuthContext'
 import Layout from '@/components/layout/Layout'
 import Chat from '@/pages/Chat'
 import Library from '@/pages/Library'
@@ -17,21 +18,22 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Chat />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/library" element={<Library />} />
-          <Route path="/explore" element={<ExploreGPTs />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-      </Layout>
-      <Toaster />
-    </div>
+    <AuthProvider>
+      <div className="min-h-screen bg-background text-foreground">
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Chat />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/library" element={<Library />} />
+            <Route path="/explore" element={<ExploreGPTs />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </Layout>
+        <Toaster />
+      </div>
+    </AuthProvider>
   )
 }
 
 export default App
-

@@ -1,19 +1,70 @@
 import { motion } from 'framer-motion'
-import { User, Mail, Shield, Info, LogOut, Edit } from 'lucide-react'
+import { User, Mail, Shield, Info, LogOut, Edit, Database, Calendar } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
+import { useAuth } from '@/contexts/AuthContext'
+import { useChatStore } from '@/stores/chatStore'
+import { useToast } from '@/hooks/use-toast'
+import { useEffect, useState } from 'react'
 
 export default function Profile() {
-  // Mock user data - will be replaced with actual Supabase auth
-  const user = {
-    name: 'Zeeshan Islam',
-    email: 'zeeshan@example.com',
-    avatar: '',
+  const { user, profile, signOut } = useAuth()
+  const { chats, loadChats } = useChatStore()
+  const { toast } = useToast()
+  const [stats, setStats] = useState({
+    totalChats: 0,
+    totalMessages: 0,
+    lastActive: 'Today'
+  })
+
+  useEffect(() => {
+    if (user) {
+      loadChats()
+    }
+  }, [user, loadChats])
+
+  useEffect(() => {
+    // Calculate usage statistics
+    const totalMessages = chats.reduce((total, chat) => total + chat.messages.length, 0)
+    setStats({
+      totalChats: chats.length,
+      totalMessages,
+      lastActive: chats.length > 0 ? 'Today' : 'Never'
+    })
+  }, [chats])
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await signOut()
+      if (error) {
+        toast({
+          title: 'Error',
+          description: 'Failed to sign out. Please try again.',
+          variant: 'destructive'
+        })
+      } else {
+        toast({
+          title: 'Signed Out',
+          description: 'You have been successfully signed out.'
+        })
+      }
+    } catch (error) {
+      console.error('Sign out error:', error)
+    }
+  }
+
+  // Mock data for display when not authenticated
+  const displayUser = {
+    name: profile?.full_name || user?.email || 'Zeeshan Islam',
+    email: user?.email || 'zeeshan@example.com',
+    avatar: profile?.avatar_url || '',
     role: 'Healthcare Professional',
-    joinDate: 'December 2024',
-    totalChats: 47,
+    joinDate: profile?.created_at 
+      ? new Date(profile.created_at).toLocaleDateString()
+      : 'December 2024',
+    totalChats: stats.totalChats || 47,
     favoriteTopics: ['Cardiology', 'Neonatology', 'Infectious Diseases']
   }
 
@@ -41,21 +92,21 @@ export default function Profile() {
             <CardHeader>
               <div className="flex items-center space-x-4">
                 <Avatar className="w-16 h-16">
-                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarImage src={displayUser.avatar} alt={displayUser.name} />
                   <AvatarFallback className="bg-muted text-lg">
-                    {user.name.split(' ').map(n => n[0]).join('')}
+                    {displayUser.name.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
-                  <CardTitle className="text-2xl">{user.name}</CardTitle>
+                  <CardTitle className="text-2xl">{displayUser.name}</CardTitle>
                   <CardDescription className="flex items-center space-x-2 mt-1">
                     <Mail className="w-4 h-4" />
-                    <span>{user.email}</span>
+                    <span>{displayUser.email}</span>
                   </CardDescription>
                   <div className="flex items-center space-x-2 mt-2">
-                    <Badge variant="secondary">{user.role}</Badge>
+                    <Badge variant="secondary">{displayUser.role}</Badge>
                     <span className="text-sm text-muted-foreground">
-                      Member since {user.joinDate}
+                      Member since {displayUser.joinDate}
                     </span>
                   </div>
                 </div>
@@ -85,7 +136,7 @@ export default function Profile() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-foreground mb-1">
-                    {user.totalChats}
+                    {displayUser.totalChats}
                   </div>
                   <div className="text-sm text-muted-foreground">
                     Total Conversations
@@ -93,18 +144,18 @@ export default function Profile() {
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-foreground mb-1">
-                    {user.favoriteTopics.length}
+                    {stats.totalMessages}
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    Favorite Topics
+                    Messages Exchanged
                   </div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-foreground mb-1">
-                    98%
+                    {displayUser.favoriteTopics.length}
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    Satisfaction Rate
+                    Favorite Topics
                   </div>
                 </div>
               </div>
@@ -127,7 +178,7 @@ export default function Profile() {
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
-                {user.favoriteTopics.map((topic, index) => (
+                {displayUser.favoriteTopics.map((topic, index) => (
                   <Badge key={index} variant="outline">
                     {topic}
                   </Badge>
@@ -199,7 +250,12 @@ export default function Profile() {
                     Sign out of your Nelson-GPT account
                   </div>
                 </div>
-                <Button variant="destructive" size="sm">
+                <Button 
+                  variant="destructive" 
+                  size="sm"
+                  onClick={handleSignOut}
+                  disabled={!user}
+                >
                   <LogOut className="w-4 h-4 mr-2" />
                   Sign Out
                 </Button>
@@ -211,4 +267,3 @@ export default function Profile() {
     </div>
   )
 }
-

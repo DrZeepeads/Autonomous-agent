@@ -118,6 +118,100 @@
   }
   
   .markdown-content h1 { @apply text-2xl; }
+
+  /* Medical markdown styling */
+  .medical-heading {
+    @apply font-semibold text-foreground mb-2;
+  }
+  
+  .medical-heading-1 {
+    @apply text-xl;
+  }
+  
+  .medical-heading-2 {
+    @apply text-lg;
+  }
+  
+  .medical-heading-3 {
+    @apply text-base;
+  }
+  
+  .medical-paragraph {
+    @apply text-foreground mb-3 leading-relaxed;
+  }
+  
+  .medical-list-item {
+    @apply text-foreground mb-1;
+  }
+  
+  .medical-blockquote {
+    @apply border-l-4 border-accent pl-4 italic text-muted-foreground;
+  }
+  
+  .medical-code-inline {
+    @apply bg-muted px-1 py-0.5 rounded text-sm font-mono;
+  }
+  
+  .medical-code-block {
+    @apply bg-muted p-3 rounded-lg overflow-x-auto;
+  }
+  
+  .medical-code {
+    @apply font-mono text-sm;
+  }
+  
+  .medical-reference {
+    @apply bg-accent/20 px-2 py-1 rounded text-sm font-medium cursor-pointer hover:bg-accent/30 transition-colors;
+  }
+  
+  .medical-dosage {
+    @apply font-semibold text-accent;
+  }
+  
+  .medical-term {
+    @apply font-medium text-foreground;
+  }
+
+  /* Prose styling for markdown content */
+  .prose {
+    @apply max-w-none;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    @apply text-foreground font-semibold;
+  }
+  
+  .prose p {
+    @apply text-foreground leading-relaxed;
+  }
+  
+  .prose ul, .prose ol {
+    @apply text-foreground;
+  }
+  
+  .prose li {
+    @apply text-foreground;
+  }
+  
+  .prose strong {
+    @apply text-foreground font-semibold;
+  }
+  
+  .prose em {
+    @apply text-foreground italic;
+  }
+  
+  .prose code {
+    @apply bg-muted px-1 py-0.5 rounded text-sm font-mono text-foreground;
+  }
+  
+  .prose pre {
+    @apply bg-muted p-3 rounded-lg overflow-x-auto;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-accent pl-4 italic text-muted-foreground;
+  }
   .markdown-content h2 { @apply text-xl; }
   .markdown-content h3 { @apply text-lg; }
   
@@ -187,4 +281,3 @@
   background-size: 200px 100%;
   animation: skeleton-loading 1.5s infinite;
 }
-
