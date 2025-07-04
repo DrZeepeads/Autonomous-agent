@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://nelson-gpt.vercel.app/sitemap.xml
+
+# Disallow sensitive areas
+Disallow: /api/
+Disallow: /.env
+Disallow: /admin/
+
+# Allow important pages
+Allow: /
+Allow: /chat
+Allow: /library
+Allow: /explore
+Allow: /settings
+Allow: /profile
+
+# Crawl delay
+Crawl-delay: 1
+

@@ -1,0 +1,14 @@
+{
+  "status": "healthy",
+  "service": "nelson-gpt",
+  "version": "1.0.0",
+  "timestamp": "2024-01-04T00:00:00Z",
+  "components": {
+    "frontend": "operational",
+    "database": "operational",
+    "ai_service": "operational"
+  },
+  "uptime": "99.9%",
+  "last_updated": "2024-01-04T00:00:00Z"
+}
+

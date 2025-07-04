@@ -1,154 +1,253 @@
-# Nelson-GPT 🧠🩺
+# 🏥 Nelson-GPT - Your Smart Pediatric Assistant
 
-**Your Smart Pediatric Assistant** - A production-ready Progressive Web App (PWA) designed for pediatric healthcare professionals and medical students.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/DrZeepeads/Autonomous-agent)
 
-## 🌟 Features
+A production-ready Progressive Web App (PWA) that delivers evidence-based pediatric healthcare answers sourced exclusively from the Nelson Textbook of Pediatrics via a Retrieval-Augmented Generation (RAG) pipeline powered by Mistral AI.
 
-- **🎨 ChatGPT-like Interface**: Familiar, professional UI with custom medical theming
-- **🧠 AI-Powered Responses**: RAG pipeline with Mistral API and Nelson Textbook content
-- **📱 Progressive Web App**: Offline capabilities, app-like experience
-- **🔍 Medical Library**: Categorized Nelson Textbook content by specialty
-- **🧮 Medical Tools**: Growth charts, drug calculators, vital signs references
-- **💬 Real-time Chat**: Streaming responses with markdown support
-- **🌙 Professional Theme**: Charcoal (#121212), White (#FFFFFF), Soft Gray (#B0B0B0)
+## 🎯 Features
 
-## 🚀 Tech Stack
+### 🤖 AI-Powered Medical Assistant
+- **RAG Pipeline**: Vector-based content retrieval from Nelson Textbook
+- **Streaming Responses**: Real-time AI responses with typing indicators
+- **Medical Context**: Specialized prompts for pediatric healthcare
+- **Evidence-Based**: All answers sourced from authoritative medical content
 
-### Frontend
-- **React 18** + **Vite** + **TypeScript**
-- **Tailwind CSS** + **Shadcn-UI**
-- **Framer Motion** for animations
-- **React Router** for navigation
-- **Zustand** for state management
+### 💬 Advanced Chat Interface
+- **Real-time Streaming**: Live AI response generation
+- **Chat History**: Persistent conversation storage
+- **Message Reactions**: Copy, thumbs up/down, audio, regenerate
+- **Mobile-First**: Responsive design optimized for all devices
 
-### Backend
-- **Supabase** (PostgreSQL + Auth + Edge Functions)
-- **pgvector** for vector embeddings
-- **Mistral API** via OpenRouter for AI responses
-- **Server-Sent Events** for streaming
+### 🔐 Secure Backend
+- **Supabase Integration**: PostgreSQL with pgvector for embeddings
+- **User Authentication**: Secure user profiles with Row Level Security
+- **Vector Database**: Optimized medical content similarity search
+- **Environment Security**: Secure API key management
 
-### PWA Features
-- Service Worker for offline functionality
-- Web App Manifest for app installation
-- IndexedDB for local data storage
-- Background sync capabilities
+### 🎨 Professional UI/UX
+- **Medical Styling**: Professional clinical content formatting
+- **Dark Theme**: Eye-friendly interface for long sessions
+- **PWA Ready**: Installable app with offline capabilities
+- **Accessibility**: WCAG compliant design patterns
 
-## 🎨 Design System
-
-### Color Palette
-- **Primary Background**: `#121212` (Charcoal)
-- **Primary Text**: `#FFFFFF` (White)
-- **Secondary Text**: `#B0B0B0` (Soft Gray)
-- **User Messages**: `#2A2A2A`
-- **AI Messages**: `#1E1E1E`
-- **Hover States**: `#333333`
-- **Error/Alerts**: `#FF5252`
-
-### Typography
-- **Font Family**: Inter, Roboto (medical-friendly sans-serif)
-- **Responsive scaling** with proper contrast ratios
-
-## 📱 App Structure
-
-### Pages
-1. **Chat** - Main AI conversation interface
-2. **Library** - Categorized medical content (Cardiology, Neonatology, etc.)
-3. **Explore GPTs** - Medical tools and calculators
-4. **Settings** - Theme, preferences, data management
-5. **Profile** - User account and statistics
-
-### Navigation
-- **Responsive sidebar** with smooth animations
-- **Mobile-first design** with touch-friendly interactions
-- **Keyboard navigation** support
-
-## 🛠️ Development
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+
+- Node.js 18+ 
 - npm or yarn
-- Supabase account (for backend)
+- Supabase account
+- Mistral AI API key
+
+### 1. Clone & Install
+```bash
+git clone https://github.com/DrZeepeads/Autonomous-agent.git
+cd Autonomous-agent
+npm install
+```
+
+### 2. Environment Setup
+Copy `.env.example` to `.env.local` and configure:
+
+```env
+# Mistral AI API Configuration
+VITE_MISTRAL_API_KEY=your_mistral_api_key_here
+
+# Supabase Configuration
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+VITE_SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
+```
+
+### 3. Database Setup
+Run the Supabase migration:
+```bash
+# In your Supabase SQL editor, run:
+# supabase/migrations/001_initial_schema.sql
+```
+
+### 4. Seed Sample Content
+```bash
+npm run dev
+# Navigate to the app and use the seeder utility
+```
+
+### 5. Development
+```bash
+npm run dev
+# Open http://localhost:3000
+```
+
+## 🌐 Vercel Deployment
+
+### One-Click Deploy
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/DrZeepeads/Autonomous-agent)
+
+### Manual Deployment
+
+1. **Connect Repository**
+   - Import your GitHub repository to Vercel
+   - Select the `Autonomous-agent` repository
+
+2. **Configure Environment Variables**
+   In Vercel dashboard, add these environment variables:
+   ```
+   VITE_MISTRAL_API_KEY=your_mistral_api_key
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   VITE_SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+   ```
+
+3. **Deploy**
+   - Vercel will automatically build and deploy
+   - Build command: `npm run build`
+   - Output directory: `dist`
+
+### Build Configuration
+The app includes optimized Vercel configuration:
+- **SPA Routing**: Proper React Router handling
+- **Security Headers**: CSP, XSS protection, frame options
+- **Performance**: Code splitting and chunk optimization
+- **PWA Support**: Service worker and manifest
+
+## 🏗️ Architecture
+
+### Frontend Stack
+- **React 18** with TypeScript
+- **Vite** for fast development and building
+- **Tailwind CSS** for styling
+- **Framer Motion** for animations
+- **Zustand** for state management
+- **React Router** for navigation
+
+### Backend Stack
+- **Supabase** (PostgreSQL + Auth + Storage)
+- **pgvector** for vector embeddings
+- **Row Level Security** for data protection
+- **Real-time subscriptions** for live updates
+
+### AI Pipeline
+- **Mistral AI** for language generation
+- **Vector similarity search** for content retrieval
+- **Streaming responses** for real-time interaction
+- **Medical context** for specialized prompts
+
+## 📚 Content Management
+
+### Sample Content Included
+- **8 Medical Topics**: Neonatology, Cardiology, Infectious Diseases, etc.
+- **Vector Embeddings**: Pre-computed for instant search
+- **Metadata Tags**: Age groups, topics, clinical relevance
+
+### Adding More Content
+Use the content seeder utility:
+```typescript
+import { seedTextbookContent } from '@/utils/seedTextbookContent'
+await seedTextbookContent()
+```
+
+## 🔧 Development
+
+### Available Scripts
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
+npm run type-check   # TypeScript type checking
+```
+
+### Project Structure
+```
+src/
+├── components/      # Reusable UI components
+├── contexts/        # React contexts (Auth, etc.)
+├── hooks/          # Custom React hooks
+├── lib/            # Utility libraries
+├── pages/          # Route components
+├── services/       # API services
+├── stores/         # State management
+├── styles/         # Global styles
+└── utils/          # Helper functions
+
+supabase/
+└── migrations/     # Database migrations
+
+public/
+├── icons/          # PWA icons
+└── _redirects      # Vercel routing rules
+```
+
+## 🔐 Security
+
+### Environment Variables
+- Never commit `.env.local` to version control
+- Use Vercel environment variables for production
+- Rotate API keys regularly
+
+### Database Security
+- Row Level Security (RLS) enabled
+- User data isolation
+- Secure API endpoints
+
+### Content Security
+- CSP headers configured
+- XSS protection enabled
+- Secure HTTPS connections
+
+## 📱 PWA Features
 
 ### Installation
-```bash
-# Clone the repository
-git clone <repository-url>
-cd nelson-gpt
+- Add to home screen on mobile
+- Standalone app experience
+- Offline capability (coming soon)
 
-# Install dependencies
-npm install
+### Performance
+- Code splitting for faster loads
+- Optimized bundle sizes
+- Efficient caching strategies
 
-# Start development server
-npm run dev
-```
+## 🎯 Roadmap
 
-### Build for Production
-```bash
-# Type check
-npm run type-check
+### Phase 1 (Current)
+- ✅ Core chat functionality
+- ✅ RAG pipeline implementation
+- ✅ User authentication
+- ✅ Vercel deployment ready
 
-# Build optimized bundle
-npm run build
+### Phase 2 (Next)
+- 🔄 Advanced medical tools (growth charts, calculators)
+- 🔄 Voice input/output
+- 🔄 Enhanced content library
+- 🔄 Analytics dashboard
 
-# Preview production build
-npm run preview
-```
-
-## 🏥 Medical Content
-
-The app integrates with the **Nelson Textbook of Pediatrics** through a sophisticated RAG (Retrieval-Augmented Generation) pipeline:
-
-1. **Content Ingestion**: Medical content is chunked and embedded
-2. **Vector Search**: Semantic similarity search using pgvector
-3. **Context Assembly**: Relevant passages are selected for AI prompts
-4. **Response Generation**: Mistral API generates evidence-based answers
-5. **Streaming Delivery**: Real-time response streaming to the frontend
-
-## 🔒 Security & Privacy
-
-- **HIPAA Considerations**: Designed with healthcare data privacy in mind
-- **Row Level Security**: Supabase RLS policies protect user data
-- **JWT Authentication**: Secure user sessions
-- **Data Encryption**: All data encrypted in transit and at rest
-
-## 📊 Performance
-
-- **Code Splitting**: Optimized bundle loading
-- **Lazy Loading**: Components and routes loaded on demand
-- **Service Worker**: Aggressive caching for offline performance
-- **Image Optimization**: Responsive images with proper formats
-
-## 🎯 Target Users
-
-- **Pediatric Healthcare Professionals**
-- **Medical Students** studying pediatrics
-- **Residents** in pediatric specialties
-- **Nurses** working in pediatric units
-
-## 🚀 Deployment
-
-The app is configured for deployment on:
-- **Vercel** (recommended for frontend)
-- **Supabase** (backend and database)
-- **Custom domains** with SSL
-
-## 📈 Future Enhancements
-
-- **Voice Input/Output** for hands-free operation
-- **Multi-language Support** for international users
-- **Advanced Analytics** for usage insights
-- **Integration APIs** for EMR systems
-- **Collaborative Features** for medical teams
+### Phase 3 (Future)
+- 📋 Mobile app (React Native)
+- 📋 Advanced AI features
+- 📋 Multi-language support
+- 📋 Integration with EHR systems
 
 ## 🤝 Contributing
 
-This is a specialized medical application. Contributions should be reviewed by healthcare professionals to ensure medical accuracy.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
 ## 📄 License
 
-This project is designed for educational and professional medical use. Please ensure compliance with medical software regulations in your jurisdiction.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+For support and questions:
+- 📧 Email: support@nelson-gpt.com
+- 💬 GitHub Issues: [Create an issue](https://github.com/DrZeepeads/Autonomous-agent/issues)
+- 📖 Documentation: [Wiki](https://github.com/DrZeepeads/Autonomous-agent/wiki)
 
 ---
 
-**Nelson-GPT** - Empowering pediatric healthcare with AI-driven insights from the world's leading pediatric textbook.
+**Built with ❤️ for pediatric healthcare professionals**
+
+*Nelson-GPT is designed to assist healthcare professionals and should not replace clinical judgment or direct patient care.*
 
