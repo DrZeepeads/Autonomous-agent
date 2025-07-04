@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 18 18 18; /* #121212 */
+    --foreground: 255 255 255; /* #FFFFFF */
+    --card: 18 18 18;
+    --card-foreground: 255 255 255;
+    --popover: 18 18 18;
+    --popover-foreground: 255 255 255;
+    --primary: 18 18 18;
+    --primary-foreground: 255 255 255;
+    --secondary: 176 176 176; /* #B0B0B0 */
+    --secondary-foreground: 18 18 18;
+    --muted: 38 38 38; /* #262626 */
+    --muted-foreground: 176 176 176;
+    --accent: 255 255 255;
+    --accent-foreground: 18 18 18;
+    --destructive: 255 82 82; /* #FF5252 */
+    --destructive-foreground: 255 255 255;
+    --border: 38 38 38;
+    --input: 30 30 30; /* #1E1E1E */
+    --ring: 255 255 255;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  /* Custom scrollbar for webkit browsers */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground;
+  }
+
+  /* Message bubble animations */
+  .message-enter {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  
+  .message-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+  }
+
+  /* Typing indicator dots */
+  .typing-dot {
+    @apply w-2 h-2 bg-muted-foreground rounded-full;
+    animation: pulse-dot 1.4s infinite ease-in-out both;
+  }
+  
+  .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+  .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+  .typing-dot:nth-child(3) { animation-delay: 0s; }
+
+  /* Gradient text for branding */
+  .gradient-text {
+    background: linear-gradient(135deg, #FFFFFF 0%, #B0B0B0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glassmorphism effect for modals */
+  .glass-effect {
+    background: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Focus styles for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  /* Button hover effects */
+  .btn-hover {
+    @apply transition-all duration-200 ease-in-out hover:bg-hover-color;
+  }
+
+  /* Markdown content styling */
+  .markdown-content {
+    @apply text-foreground leading-relaxed;
+  }
+  
+  .markdown-content h1,
+  .markdown-content h2,
+  .markdown-content h3,
+  .markdown-content h4,
+  .markdown-content h5,
+  .markdown-content h6 {
+    @apply font-semibold mb-4 mt-6 first:mt-0;
+  }
+  
+  .markdown-content h1 { @apply text-2xl; }
+  .markdown-content h2 { @apply text-xl; }
+  .markdown-content h3 { @apply text-lg; }
+  
+  .markdown-content p {
+    @apply mb-4 last:mb-0;
+  }
+  
+  .markdown-content ul,
+  .markdown-content ol {
+    @apply mb-4 pl-6;
+  }
+  
+  .markdown-content li {
+    @apply mb-1;
+  }
+  
+  .markdown-content ul li {
+    @apply list-disc;
+  }
+  
+  .markdown-content ol li {
+    @apply list-decimal;
+  }
+  
+  .markdown-content code {
+    @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+  
+  .markdown-content pre {
+    @apply bg-muted p-4 rounded-lg overflow-x-auto mb-4;
+  }
+  
+  .markdown-content pre code {
+    @apply bg-transparent p-0;
+  }
+  
+  .markdown-content blockquote {
+    @apply border-l-4 border-muted pl-4 italic mb-4;
+  }
+  
+  .markdown-content table {
+    @apply w-full border-collapse mb-4;
+  }
+  
+  .markdown-content th,
+  .markdown-content td {
+    @apply border border-muted px-3 py-2 text-left;
+  }
+  
+  .markdown-content th {
+    @apply bg-muted font-semibold;
+  }
+}
+
+/* Loading skeleton animations */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #262626 25%, #333333 50%, #262626 75%);
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
