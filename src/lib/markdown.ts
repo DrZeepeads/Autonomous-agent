@@ -10,7 +10,7 @@ const md = new MarkdownIt({
 })
 
 // Custom renderer for medical content
-md.renderer.rules.heading_open = (tokens, idx, options, env, renderer) => {
+md.renderer.rules.heading_open = (tokens, idx, _options, _env, _renderer) => {
   const token = tokens[idx]
   const level = token.tag
   const className = `medical-heading medical-heading-${level.slice(1)}`
@@ -116,4 +116,3 @@ export function highlightMedicalTerms(text: string): string {
   
   return result
 }
-

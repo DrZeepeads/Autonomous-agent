@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Moon, Sun, Volume2, VolumeX, Download, Trash2, MessageSquare, Bell } from 'lucide-react'
+import { Sun, Volume2, Download, Trash2, MessageSquare, Bell } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Switch } from '@/components/ui/switch'
 import { Button } from '@/components/ui/button'
@@ -62,7 +62,7 @@ export default function Settings() {
                 <Switch
                   id="dark-mode"
                   checked={settings.darkMode}
-                  onCheckedChange={(checked) => updateSetting('darkMode', checked)}
+                  onCheckedChange={(checked: boolean) => updateSetting('darkMode', checked)}
                 />
               </div>
               
@@ -71,7 +71,7 @@ export default function Settings() {
                 <div className="px-3">
                   <Slider
                     value={settings.fontSize}
-                    onValueChange={(value) => updateSetting('fontSize', value)}
+                    onValueChange={(value: number[]) => updateSetting('fontSize', value)}
                     max={24}
                     min={12}
                     step={1}
@@ -115,7 +115,7 @@ export default function Settings() {
                 <Switch
                   id="sound-enabled"
                   checked={settings.soundEnabled}
-                  onCheckedChange={(checked) => updateSetting('soundEnabled', checked)}
+                  onCheckedChange={(checked: boolean) => updateSetting('soundEnabled', checked)}
                 />
               </div>
             </CardContent>
@@ -149,7 +149,7 @@ export default function Settings() {
                 <Switch
                   id="streaming"
                   checked={settings.streamingResponses}
-                  onCheckedChange={(checked) => updateSetting('streamingResponses', checked)}
+                  onCheckedChange={(checked: boolean) => updateSetting('streamingResponses', checked)}
                 />
               </div>
               
@@ -163,7 +163,7 @@ export default function Settings() {
                 <Switch
                   id="auto-save"
                   checked={settings.autoSave}
-                  onCheckedChange={(checked) => updateSetting('autoSave', checked)}
+                  onCheckedChange={(checked: boolean) => updateSetting('autoSave', checked)}
                 />
               </div>
             </CardContent>
@@ -197,7 +197,7 @@ export default function Settings() {
                 <Switch
                   id="notifications"
                   checked={settings.notifications}
-                  onCheckedChange={(checked) => updateSetting('notifications', checked)}
+                  onCheckedChange={(checked: boolean) => updateSetting('notifications', checked)}
                 />
               </div>
             </CardContent>
@@ -250,4 +250,3 @@ export default function Settings() {
     </div>
   )
 }
-
