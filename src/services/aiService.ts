@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabase'
 
-const MISTRAL_API_KEY = import.meta.env.VITE_MISTRAL_API_KEY
+const MISTRAL_API_KEY = import.meta.env.VITE_MISTRAL_API_KEY as string
 const MISTRAL_API_URL = 'https://api.mistral.ai/v1/chat/completions'
 
 export interface RAGContext {
@@ -230,4 +230,3 @@ RESPONSE:`
 }
 
 export const aiService = new AIService()
-

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { User, Mail, Shield, Info, LogOut, Edit, Database, Calendar } from 'lucide-react'
+import { Mail, Shield, Info, LogOut, Edit } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
